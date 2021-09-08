@@ -2,40 +2,48 @@ package filters;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebFilter;
 
 /**
- * Servlet implementation class EncodingFilter
+ * Servlet Filter implementation class EncodingFilter
  */
-@WebServlet("/*")
-public class EncodingFilter extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebFilter("/*")
+public class EncodingFilter implements Filter {
 
-
+    /**
+     * Default constructor.
+     */
     public EncodingFilter() {
-        super();
 
     }
 
-
+    /**
+     * @see Filter#destroy()
+     */
     public void destroy() {
 
     }
 
+    /**
+     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-            request.setCharacterEncoding("UTF-8");
-            response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-            chain.doFilter(request,response );
+        chain.doFilter(request, response);
     }
 
-    public void init(FilterConfig fConfig)throws ServletException{
+    /**
+     * @see Filter#init(FilterConfig)
+     */
+    public void init(FilterConfig fConfig) throws ServletException {
 
     }
 
